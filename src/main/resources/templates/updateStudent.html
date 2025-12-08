@@ -2,67 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>受講生詳細</title>
+  <title>受講生編集</title>
 </head>
 <body>
-<h1>受講生詳細</h1>
+
+<h1>受講生編集</h1>
+
 <form th:action="@{/updateStudent}" th:object="${studentDetail}" method="post">
+
   <div>
-    <label for="id">ID:</label>
-    <input type="text" id="id" th:field="*{student.id}" required />
-  </div>
-  <div>
-    <label for="name">名前:</label>
-    <input type="text" id="name" th:field="*{student.name}" required />
-  </div>
-  <div>
-    <label for="kanaName">カナ名:</label>
-    <input type="text" id="kanaName" th:field="*{student.kanaName}" required />
-  </div>
-  <div>
-    <label for="nickname">ニックネーム:</label>
-    <input type="text" id="nickname" th:field="*{student.nickname}" required />
-  </div>
-  <div>
-    <label for="email">メールアドレス:</label>
-    <input type="text" id="email" th:field="*{student.email}" required />
-  </div>
-  <div>
-    <label for="region">地域:</label>
-    <input type="text" id="region" th:field="*{student.region}" required />
-  </div>
-  <div>
-    <label for="age">年齢:</label>
-    <input type="text" id="age" th:field="*{student.age}" />
-  </div>
-  <div>
-    <label for="sex">性別:</label>
-    <input type="text" id="sex" th:field="*{student.sex}" />
-  </div>
-  <div>
-    <label for="remark">備考:</label>
-    <input type="text" id="remark" th:field="*{student.remark}" />
+    <label>ID：</label>
+    <input type="text" th:field="*{student.id}" readonly />
   </div>
 
   <div>
-    <label for="isDeleted">キャンセル:</label>
-    <input type="checkbox" id="isDeleted" th:field="*{student.deleted}" />
+    <label>名前：</label>
+    <input type="text" th:field="*{student.name}" required />
   </div>
 
+  <div>
+    <label>カナ名：</label>
+    <input type="text" th:field="*{student.kanaName}" required />
+  </div>
+
+  <div>
+    <label>ニックネーム：</label>
+    <input type="text" th:field="*{student.nickname}" required />
+  </div>
+
+  <div>
+    <label>メール：</label>
+    <input type="text" th:field="*{student.email}" required />
+  </div>
+
+  <div>
+    <label>地域：</label>
+    <input type="text" th:field="*{student.region}" required />
+  </div>
+
+  <div>
+    <label>年齢：</label>
+    <input type="text" th:field="*{student.age}" />
+  </div>
+
+  <div>
+    <label>性別：</label>
+    <input type="text" th:field="*{student.sex}" />
+  </div>
+
+  <div>
+    <label>備考：</label>
+    <input type="text" th:field="*{student.remark}" />
+  </div>
+
+  <div>
+    <label>キャンセル：</label>
+    <input type="checkbox" th:field="*{student.isDeleted}" />
+  </div>
+
+  <h3>受講コース</h3>
 
   <div th:each="course, stat : *{studentCourses}">
-    <!-- hiddenでidを送信 -->
+
     <input type="hidden" th:field="*{studentCourses[__${stat.index}__].id}" />
 
-    <label th:for="courseName__${stat.index}__">受講コース名:</label>
-    <input type="text" th:id="courseName__${stat.index}__"
-           th:field="*{studentCourses[__${stat.index}__].courseName}" />
+    <label>コース名：</label>
+    <input type="text" th:field="*{studentCourses[__${stat.index}__].courseName}" />
   </div>
 
+  <button type="submit">更新</button>
 
-  <div>
-    <button type="submit">更新</button>
-  </div>
 </form>
+
 </body>
 </html>
